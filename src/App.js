@@ -1,18 +1,23 @@
 import { Col } from 'antd';
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getPokemon from './api';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
-import { setPokemon as setPokemonActions } from './redux/actions';
+import { setPokemon } from './redux/actions';
 import logo from './statics/logo.svg';
 
-function App({pokemon, setPokemon}) {
+function App() {
+
+  //Recibe el estado y retorna el valor que deseo obtener del estado
+  const pokemon = useSelector(s => s.pokemon);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fecthPokemon = async () => { 
       const pokemonResp = await getPokemon();
-      setPokemon(pokemonResp);
+      dispatch(setPokemon(pokemonResp));
     }
     fecthPokemon();
   }, [])
@@ -33,14 +38,5 @@ function App({pokemon, setPokemon}) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  pokemon: state.pokemon,
-});
-
-const mapDispacthToProps = (dispacth) => ({
-  setPokemon:(value) => dispacth(setPokemonActions(value)),
-});
-
-export default connect(mapStateToProps, mapDispacthToProps) (App);
-
+export default App;
 //ant desing maneja 18 espacios
