@@ -1,0 +1,21 @@
+@import 'antd/dist/antd.css';
+.App {
+  margin-top: 3rem;
+}
+.App img {
+  margin-bottom: 3rem;
+}
+
+.PokemonList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 3rem;
+  padding: 0 3rem 3rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}/*# sourceMappingURL=Index.css.map */
