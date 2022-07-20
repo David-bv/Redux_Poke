@@ -6,21 +6,22 @@ import App from './App';
 import { pokemonReducer } from './redux/reducer/pokemonReducer';
 
 import './styles/index.css';
-import { featuring, logger } from './middlewares';
+import { logger } from './middlewares';
+import thunk from 'redux-thunk';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const composedEnhancer = compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(logger, featuring)
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__|| compose;
+
+const composedEnhancer = composeAlt(
+  applyMiddleware(thunk, logger)
 );
 
 const store = createStore(
   pokemonReducer,
   composedEnhancer 
 );
-
 
 root.render(
   <React.StrictMode>

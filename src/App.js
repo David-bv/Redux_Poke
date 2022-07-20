@@ -1,10 +1,10 @@
 import { Col } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import getPokemon from './api';
+import { getPokemon } from './api';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
-import { setPokemon } from './redux/actions';
+import { getPokemonWithDetails } from './redux/actions';
 import logo from './statics/logo.svg';
 
 function App() {
@@ -15,15 +15,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fecthPokemon = async () => { 
+    const fecthPokemon = async () => {
       const pokemonResp = await getPokemon();
-      dispatch(setPokemon(pokemonResp));
+      dispatch(getPokemonWithDetails(pokemonResp));
     }
     fecthPokemon();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   //Cuando se monta en un componente se envía un arreglo vacio
-
-  console.log('state', pokemon);
 
   return (
     <div className="App">
@@ -31,9 +30,9 @@ function App() {
         <img src={logo} alt="logo" />
       </Col>
       <Col span={8} offset={8}>
-        <Searcher/>
+        <Searcher />
       </Col>
-      <PokemonList pokemon={pokemon}/>
+      <PokemonList pokemon={pokemon} />
     </div>
   );
 }

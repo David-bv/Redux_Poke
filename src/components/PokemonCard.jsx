@@ -3,15 +3,15 @@ import { Card } from 'antd'
 import { Meta } from 'antd/lib/list/Item'
 import React from 'react'
 
-const PokemonCard = ({ name }) => {
+const PokemonCard = ({ name, image, type }) => {
     return (
         <Card
             style={{ width: 250 }}
             title={name}
-            cover={<img alt="Ditto" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" />}
+            cover={<img alt={name} src={image} />}
             extra={<StarOutlined/>}
         >
-            <Meta description="Ditto is a  normal Pokémon" />
+            <Meta description={type} />
         </Card>
     )
 }

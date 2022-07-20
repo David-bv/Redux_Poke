@@ -1,11 +1,16 @@
 import axios from 'axios'
 import { url } from './url'
 
-const getPokemon = () => {
+export const getPokemon = () => {
   return axios
   .get(url)
   .then(res => res.data.results)
   .catch(err => console.log(err));
 };
 
-export default getPokemon
+export const getPokemonDetail = (pokemon) => {
+  return axios
+  .get(pokemon.url)
+  .then(res => res.data)
+  .catch(err => console.log(err));
+};
