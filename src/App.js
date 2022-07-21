@@ -1,10 +1,10 @@
-import { Col } from 'antd';
+import { Col, Spin } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemon } from './api';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
-import { getPokemonWithDetails } from './redux/actions';
+import { getPokemonWithDetails, setLoading } from './redux/actions';
 import logo from './statics/logo.svg';
 
 function App() {
@@ -12,12 +12,16 @@ function App() {
   //Recibe el estado y retorna el valor que deseo obtener del estado
   const pokemon = useSelector(s => s.pokemon);
 
+  const loading = useSelector(s => s.loading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fecthPokemon = async () => {
+      dispatch(setLoading(true));
       const pokemonResp = await getPokemon();
       dispatch(getPokemonWithDetails(pokemonResp));
+      dispatch(setLoading(false));
     }
     fecthPokemon();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +36,15 @@ function App() {
       <Col span={8} offset={8}>
         <Searcher />
       </Col>
-      <PokemonList pokemon={pokemon} />
+      {
+        loading ? (
+          <Col offset={12}>
+            <Spin spinning size='large' />
+        </Col>
+        ) : (
+          <PokemonList pokemon={pokemon} />
+        )
+      }
     </div>
   );
 }

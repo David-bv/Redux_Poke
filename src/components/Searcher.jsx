@@ -3,6 +3,7 @@ const { Search } = Input;
 
 const Searcher = () => {
     return <Search 
+           className='searchInput'
            placeholder="Buscar..." 
            //onSearch={onSearch} 
            enterButton /

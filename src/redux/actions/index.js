@@ -1,10 +1,15 @@
 import { getPokemonDetail } from "../../api";
-import { SET_POKEMON } from "./types";
+import { SET_LOADING, SET_POKEMON } from "./types";
 
 export const setPokemon = (payload) => ({
     type: SET_POKEMON,
     payload,
 })
+
+export const setLoading = (payload) => ({
+  type: SET_LOADING,
+  payload
+}) 
 
 //crear action creator
 export const getPokemonWithDetails = ( data = []) => async (dispatch) => {
