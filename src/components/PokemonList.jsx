@@ -6,11 +6,13 @@ const PokemonList = ({ pokemon }) => {
     <div className='PokemonList'>
       {pokemon.map((pokemon) => (
         <PokemonCard 
+          id={pokemon.id}
           name={pokemon.name}  
           image={pokemon.sprites.front_default} 
-          type={pokemon.types.map((pokemon) => (
-            pokemon.type.name))}
+          type={pokemon.types}
           key={pokemon.name} 
+          //favorite toma el valor booleano de la propiedad favorite colcoada en el reducer de SET_FAVORITE
+          favorite={pokemon.favorite}
         />))}
     </div>
   )
