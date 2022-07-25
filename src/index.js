@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from './App';
-import { pokemonReducer } from './redux/reducer/pokemonReducer';
-
-import './styles/index.css';
 import { logger } from './middlewares';
 import thunk from 'redux-thunk';
+import rootReducer from './redux/reducer/rootReducer';
+
+import './styles/index.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,7 +19,7 @@ const composedEnhancer = composeAlt(
 );
 
 const store = createStore(
-  pokemonReducer,
+  rootReducer,
   composedEnhancer 
 );
 
